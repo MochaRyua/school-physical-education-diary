@@ -50,4 +50,10 @@ public class DiaryServiceImpl implements DiaryService{
         }
         return list;
     }
+
+    @Override
+    public void dropDiary(Integer uuid) {
+
+        diaryRepository.deleteById(uuid);
+    }
 }

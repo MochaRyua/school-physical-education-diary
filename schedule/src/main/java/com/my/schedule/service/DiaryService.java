@@ -9,4 +9,5 @@ public interface DiaryService {
 
     public void diarySave(DiaryRequest diaryRequest);
     public List<DiaryListResponse> diaryList();
+    public void dropDiary(Integer uuid);
 }

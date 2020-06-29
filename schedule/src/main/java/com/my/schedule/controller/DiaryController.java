@@ -4,10 +4,7 @@ import com.my.schedule.domain.payload.request.DiaryListResponse;
 import com.my.schedule.domain.payload.request.DiaryRequest;
 import com.my.schedule.service.DiaryServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,5 +25,11 @@ public class DiaryController {
     public List<DiaryListResponse> list() {
 
        return diaryService.diaryList();
+    }
+
+    @GetMapping("/drop")
+    public void drop(@RequestParam Integer uuid) {
+
+        diaryService.dropDiary(uuid);
     }
 }
