@@ -5,10 +5,12 @@ import com.my.schedule.domain.payload.request.DiaryListResponse;
 import com.my.schedule.domain.payload.request.DiaryRequest;
 import com.my.schedule.domain.repository.DiaryRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -20,6 +22,7 @@ public class DiaryServiceImpl implements DiaryService{
 
     @Override
     public void diarySave(DiaryRequest diaryRequest) {
+
         if (diaryRequest.getCreatedDate() == null) {
             diaryRepository.save(
                     Diary.builder()
@@ -42,11 +45,13 @@ public class DiaryServiceImpl implements DiaryService{
 
         List<DiaryListResponse> list = new ArrayList<>();
 
-        for (Diary diary : diaryRepository.findAll()) {
-            list.add(DiaryListResponse.builder()
-            .content(diary.getContent())
-            .createdDate(diary.getCreatedDate())
-            .build());
+        for (Diary diary : diaryRepository.findAllByOrderByCreatedDateAsc()) {
+            list.add(
+                    DiaryListResponse.builder()
+                            .uuid(diary.getUuid())
+                            .content(diary.getContent())
+                            .createdDate(diary.getCreatedDate())
+                            .build());
         }
         return list;
     }

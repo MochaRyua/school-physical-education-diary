@@ -10,6 +10,8 @@ import java.time.LocalDate;
 @Builder
 public class DiaryListResponse {
 
+    private Integer uuid;
+
     private String content;
 
     private LocalDate createdDate;
